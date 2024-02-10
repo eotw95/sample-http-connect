@@ -17,6 +17,8 @@ import com.example.samplehttpconnect.ui.theme.SampleHttpConnectTheme
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class MainActivity : ComponentActivity() {
     private val httpConnectionManager = HttpConnectionManager()
@@ -25,6 +27,9 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // serialize and deserialize sample data
+        serializeAndDeserialize()
 
         setContent {
             SampleHttpConnectTheme {
@@ -41,5 +46,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun serializeAndDeserialize() {
+        val sampleData = SampleData(
+            1,
+            "sample"
+        )
+        val jsonString = Json.encodeToString(sampleData)
+        println("serializeAndDeserialize jsonString=$jsonString")
+        val deserialized = Json.decodeFromString<SampleData>(jsonString)
+        println("serializeAndDeserialize deserialized=$deserialized")
     }
 }
