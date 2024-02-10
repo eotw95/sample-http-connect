@@ -36,6 +36,8 @@ class MainActivity : ComponentActivity() {
                 var response by remember { mutableStateOf("") }
                 GlobalScope.launch {
                     response = httpConnectionManager.fetchHttpData()
+                    // Todo: Qiita APIとネットワーク通信したレスポンスのJsonをQiitaResponseにデシリアライズしたけど、どうやるのか。
+                    //  Rss feedのように、解析して、パースする？
                 }
                 // A surface container using the 'background' color from the theme
                 Surface(
