@@ -49,13 +49,30 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun serializeAndDeserialize() {
+        // SampleData
         val sampleData = SampleData(
             1,
             "sample"
         )
-        val jsonString = Json.encodeToString(sampleData)
-        println("serializeAndDeserialize jsonString=$jsonString")
-        val deserialized = Json.decodeFromString<SampleData>(jsonString)
-        println("serializeAndDeserialize deserialized=$deserialized")
+        val jsonStr1 = Json.encodeToString(sampleData)
+        println("serializeAndDeserialize jsonString=$jsonStr1")
+        val deserialized1 = Json.decodeFromString<SampleData>(jsonStr1)
+        println("serializeAndDeserialize deserialized=$deserialized1")
+
+        // QiitaResponse
+        val qiitaResponse = QiitaResponse(
+            "title",
+            "https://dummy.com",
+            "body",
+            QiitaResponse.User(
+                "1",
+                "https://image.com"
+            ),
+            "20240210"
+        )
+        val jsonStr2 = Json.encodeToString(qiitaResponse)
+        println("serializeAndDeserialize jsonStr2=$jsonStr2")
+        val deserialized2 = Json.decodeFromString<QiitaResponse>(jsonStr2)
+        println("serializeAndDeserialize deserialized2=$deserialized2")
     }
 }
